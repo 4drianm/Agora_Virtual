@@ -48,10 +48,10 @@
   	    <div class="collapse navbar-collapse" id="navbarResponsive">
   	      <ul class="navbar-nav ml-auto">
   	        <li class="nav-item">
-  	          <a class="nav-link js-scroll-trigger" href="index.php?opcion=0">Inicio</a>
+  	          <a class="nav-link" href="index.php?opcion=0">Inicio</a>
   	        </li>
   	        <li class="nav-item">
-  	          <a class="nav-link js-scroll-trigger" href="index.php?opcion=1">Bebidas</a>
+  	          <a class="nav-link" href="index.php?opcion=1">Bebidas</a>
   	        </li>
   	        <li class="nav-item">
   	          <a class="nav-link" href="index.php?opcion=2">Comida</a>

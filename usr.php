@@ -1,89 +1,95 @@
 <?php
   include('session.php');
+  include('connect.php');
 ?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
 	<title>Agora Virtual</title>
-	<meta charset="utf-8">
-  <link rel="stylesheet" type="text/css" href="css/reset.css">
-	<link rel="stylesheet" type="text/css" href="css/responsive.css">
-	<script type="text/javascript" src="js/jquery.js"></script>
-  <script type="text/javascript" src="js/main.js"></script>
-  <style>
-    .listings{
-      min-height: calc(100vh - 250px);
-    }
-  </style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="vendor/main.css" rel="stylesheet">
 </head>
 <body>
-  <header>
-	  <div class="wrapper">
-	  	<a href="index.php"><img src="img/AgoraVirtual.png" class="logo"/></a>
-	  	<a href="#" class="hamburger"></a>
-	  	<nav>
-	  	  <ul>
-	  	    <li><a href="index.php?opcion=0">Inicio</a></li> 
-	  	    <li><a href="index.php?opcion=1">Bebidas</a></li>
-	  	    <li><a href="index.php?opcion=2">Comida</a></li>
-	  	    <li><a href="index.php?opcion=3">Dulces</a></li>
-	  	    <li><a href="index.php?opcion=4">Cigarros</a></li>
-	  	    <li><a href="index.php?opcion=5">Postres</a></li>
-	  	  </ul>
-	  		<a href="usr.php" class="login_btn">Yo Vendo</a>
-	  	</nav>
-    </div>
-	</header>
-  <section id="secUser">    
-    <div id="welcome">
-      <?php
-        require 'connect.php';
-          
-        echo "<h4>Bienvenido: $usr </h4>";
-      ?>
-      <a href = "logout.php"><button>Clean Session</button></a>
-    </div>
-  </section>
+  <nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top">
+    <div class="container">
+      <a class="navbar-brand" href="index.php">
+        <img src="img/AgoraVirtual.png">
+      </a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="index.php?opcion=0">Inicio</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="index.php?opcion=1">Bebidas</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="index.php?opcion=2">Comida</a>
+          </li>    
+          <li class="nav-item">
+            <a class="nav-link" href="index.php?opcion=3">Dulces</a>
+          </li>    
+          <li class="nav-item">
+            <a class="nav-link" href="index.php?opcion=4">Cigarros</a>
+          </li>    
+          <li class="nav-item">
+            <a class="nav-link" href="index.php?opcion=5">Postres</a>
+          </li>        
+        </ul>
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a href="usr.php" class="btn btn-outline-light btn-sm" role="button">Yo vendo</a>
+          </li>
+        </ul>
+      </div>
+    </div>  
+  </nav>
 
-  <section class="listings">
-    <div class="wrapper">    
-      <ul class="properties_list">   
-      <?php
-        $query = mysqli_query($link, "SELECT nombre, precio, descripcion, id_producto FROM productos WHERE id_vendedor = ". $id);
-        while ($row = mysqli_fetch_assoc($query)) {
-          echo '<li><img src="img/food_3.jpg" class="property_img"/>
-                  <span class="price">$'.$row['precio'].'</span>
-                  <div class="property_details">
-                  <h1>'.$row['nombre'].'</h1>
-                  <p>'.$row['descripcion'].'</p>
-                  <h3>'.$row['nombre_vendedor'].'</h3>                  
-                  <input type="button" value="Borrar" onclick="eliminarProd('.$row['id_producto'].')"> 
+  <div class="container" style="margin-top:80px;">
+    <div class="row">
+      <div class="col-md-3 col-lg-2">
+        <?php echo "<h4>Bienvenido:<br/>$usr </h4>"; ?>
+        <a href = "logout.php"><button type="button" class="btn btn-outline-danger w-50">Salir</button></a>
+      </div>
+      <div class="col-md-9 col-lg-10">
+        <div class="row d-flex justify-content-around">
+          <?php
+            $query = mysqli_query($link, "SELECT nombre, precio, descripcion, id_producto FROM productos WHERE id_vendedor = ". $id);
+            while ($row = mysqli_fetch_assoc($query)) {
+              echo  '<div class="col-">
+                  <div class="card">
+                  <img class="card-img-top" src="img/food_1.jpg" alt="Card image cap">
+                  <div class="card-img-overlay">
+                    <h6 class="card-title">$'.$row['precio'].'</h6>
                   </div>
-                </li>';
-        }
-      ?>       
-      </ul>      
-    </div>
+                  <div class="card-body">
+                    <h5 class="card-title">'.$row['nombre'].'</h5>            
+                    <p class="card-text">'.$row['descripcion'].'</p>
+                    <input type="button" value="Borrar" onclick="eliminarProd('.$row['id_producto'].')">                    
+                    <button type="button" class="btn btn-danger btn-T" value="Borrar" onclick="eliminarProd('.$row['id_producto'].')">
+                      <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                    </button>
+                    </div>
+                </div></div>';
+            }
+          ?>
+        </div>
+      </div>
+    </div>      
+  </div>
+  <footer class="py-3 bg-dark fixed-bottom">
+  	<div class="container">
+  	  <p class="m-0 text-center text-white"></p>
+  	</div>
+  </footer>
   
-    <div id="usrStatus">
-      <form action="update.php" method="post">
-        <!-- <p>Disponible <input type="checkbox" data-role="flipswitch" name="available" id="switch" value="1"></p> -->
-        <h3>Disponible <input type="checkbox" data-role="flipswitch" name="available" id="switch" value="1"/></h3>
-        <h3>Horario<br>
-            <input type="time" name="schedule_b" value="07:00:00" max="16:00:00" min="07:00:00" step="1">
-            a
-            <input type="time" name="schedule_f" value="16:00:00" max="16:00:00" min="07:00:00" step="1">
-        </h3>
-        <input type="hidden" name="userid" id="userid" value=<?php if(isset($usr)){echo "$usr";}?>>
-        <h3><input type="submit" data-inline="true" value="Hecho"/></h3>
-      </form>
-      <br/>
-      <br/>
-      <input type="button" value="Agregar Producto" onclick="send()">
-    </div>
-  </section>
-	<footer>			
-	</footer>
+  <script src="vendor/jquery/jquery.min.js"></script>
+  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
   
   <script>
     var xmlHttp = false;

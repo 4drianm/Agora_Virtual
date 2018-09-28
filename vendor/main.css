@@ -15,17 +15,38 @@
 	margin: auto;
 	margin-top: 150px;
 }
-
+.card-img-overlay {
+	width: 53px;
+	height: 37px;
+	top: 11px;
+	left: 11px;
+	padding: 7px 10px;
+	background-color: #fffc
+}
+.btn-T{
+  padding: 4px 8px;
+  font-size: 10px;
+  opacity: 0.2;
+}
+.btn-T:hover{
+  opacity: 1;
+}
 @media screen and (max-width: 1200px) {
 	.col- {
 		max-width: 285px;
 		padding-right: 11px;
 		padding-left: 11px;
 	}
+	.col-lg-10 .col- {
+		max-width: 32%;
+	}
 }
 @media screen and (max-width: 992px) {
 	.col- {
 		min-width: 45%;
+	}
+	.col-md-9 .col- {
+		max-width: 48%;
 	}
 }
 @media screen and (max-width: 768px) {	

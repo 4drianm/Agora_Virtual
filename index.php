@@ -19,10 +19,10 @@
       <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav ml-auto">
           <li class="nav-item">
-            <a class="nav-link js-scroll-trigger" href="index.php?opcion=0">Inicio</a>
+            <a class="nav-link" href="index.php?opcion=0">Inicio</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link js-scroll-trigger" href="index.php?opcion=1">Bebidas</a>
+            <a class="nav-link" href="index.php?opcion=1">Bebidas</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="index.php?opcion=2">Comida</a>
@@ -51,16 +51,16 @@
 
       <?php
       include("connect.php");      
-      $option = $_GET['opcion'];
+      $option = $_GET["opcion"];
       
-      if($option == 0){
+      if($option == 0 ){
         $query = mysqli_query($link, "SELECT * FROM productos INNER JOIN vendedores ON productos.id_vendedor = vendedores.id_vendedor");
         while ($row = mysqli_fetch_assoc($query)) {
             echo  '<div class="col-">
                 <div class="card">
                 <img class="card-img-top" src="img/food_1.jpg" alt="Card image cap">
                 <div class="card-img-overlay">
-                  <h5 class="card-title">'.$row['precio'].'</h5>
+                  <h6 class="card-title">$'.$row['precio'].'</h6>
                 </div>
                 <div class="card-body">
                   <h5 class="card-title">'.$row['nombre'].'</h5>            
@@ -76,7 +76,7 @@
                 <div class="card">
                 <img class="card-img-top" src="img/food_1.jpg" alt="Card image cap">
                 <div class="card-img-overlay">
-                  <h5 class="card-title">'.$row['precio'].'</h5>
+                  <h6 class="card-title">$'.$row['precio'].'</h6>
                 </div>
                 <div class="card-body">
                   <h5 class="card-title">'.$row['nombre'].'</h5>            
