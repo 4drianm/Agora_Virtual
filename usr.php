@@ -9,6 +9,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet">
   <link href="vendor/main.css" rel="stylesheet">
 </head>
 <body>
@@ -50,10 +51,61 @@
     </div>  
   </nav>
 
-  <div class="container" style="margin-top:80px;">
+  <section>
+      <!-- Modal -->
+    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLongTitle">Agregar producto</h5>        
+          </div>
+          <div class="modal-body">
+            <form action="insertar.php" method="POST">
+
+              <div class="form-group">
+                <label class="col-form-label">Producto:</label>
+                <input type="text" class="form-control" name="product" requierd maxlength="30">
+              </div>
+              <div class="form-group">
+                <label class="col-form-label">Descripción:</label>
+                <input type="text" class="form-control" name="description" maxlength="65"></textarea>
+              </div>
+              <div class="form-group">
+                <label class="col-form-label">Categoria:</label>
+                <select name="category" required>
+                    <option>Elige una opción</option>
+                    <option value="1">Bebidas</option>
+                    <option value="2">Comida</option>
+                    <option value="3">Dulces</option>
+                    <option value="4">Cigarros</option>
+                    <option value="5">Postres</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label class="col-form-label">Precio $</label>
+                  <input type="number" size="3" name="price" min="1" max="150" required>
+              </div>
+              <input type="hidden" name="userid" value='<?php echo "$id";?>' >
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary">Save changes</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="container" style="margin-top:80px;margin-bottom:45px;">
     <div class="row">
-      <div class="col-md-3 col-lg-2">
-        <?php echo "<h4>Bienvenido:<br/>$usr </h4>"; ?>
+      <div class="col-md-3 col-lg-2" style="margin-bottom:30px;">
+        <?php echo "<h4>Bienvenido:<br/>$usr </h4><br/>"; ?>
+        <button type="button" class="btn btn-primary w-65" data-toggle="modal" data-target="#exampleModalCenter">
+          Agregar
+        </button>
+        <br/>
+        <br/>
         <a href = "logout.php"><button type="button" class="btn btn-outline-danger w-50">Salir</button></a>
       </div>
       <div class="col-md-9 col-lg-10">
@@ -68,15 +120,15 @@
                     <h6 class="card-title">$'.$row['precio'].'</h6>
                   </div>
                   <div class="card-body">
-                    <h5 class="card-title">'.$row['nombre'].'</h5>            
+                    <h5 class="card-title">'.$row['nombre'].'</h5>
                     <p class="card-text">'.$row['descripcion'].'</p>
-                    <input type="button" value="Borrar" onclick="eliminarProd('.$row['id_producto'].')">                    
-                    <button type="button" class="btn btn-danger btn-T" value="Borrar" onclick="eliminarProd('.$row['id_producto'].')">
-                      <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                    <button type="button" class="btn btn-danger btn-T text-right" value="Borrar" onclick="eliminarProd('.$row['id_producto'].')" aria-label="Delete">
+                    <i class="fa fa-trash-o" aria-hidden="true"></i>
                     </button>
                     </div>
                 </div></div>';
             }
+            mysqli_close($link);
           ?>
         </div>
       </div>

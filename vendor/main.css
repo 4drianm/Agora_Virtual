@@ -24,9 +24,12 @@
 	background-color: #fffc
 }
 .btn-T{
-  padding: 4px 8px;
-  font-size: 10px;
-  opacity: 0.2;
+	padding: 1px 5px;
+	font-size: 15px;
+	opacity: 0.4;
+	position: absolute;
+	right: 8px;
+	bottom: 8px;
 }
 .btn-T:hover{
   opacity: 1;

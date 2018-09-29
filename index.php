@@ -5,6 +5,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet">
   <link href="vendor/main.css" rel="stylesheet">
 </head>
 <body>
@@ -46,11 +47,11 @@
     </div>  
   </nav>
   
-  <div class="container" style="margin-top:80px;">
+  <div class="container" style="margin-top:80px;margin-bottom:45px;">
     <div class="row d-flex justify-content-around">
 
       <?php
-      include("connect.php");      
+      include("connect.php");
       $option = $_GET["opcion"];
       
       if($option == 0 ){
@@ -79,18 +80,17 @@
                   <h6 class="card-title">$'.$row['precio'].'</h6>
                 </div>
                 <div class="card-body">
-                  <h5 class="card-title">'.$row['nombre'].'</h5>            
+                  <h5 class="card-title">'.$row['nombre'].'</h5>
                   <p class="card-text">'.$row['descripcion'].'</p>
                   <p class="card-text"><small class="text-muted">'.$row['nombre_vendedor'].'</small></p>
                 </div>
               </div></div>';
           }
       }
+      mysqli_close($link);
       ?>
     </div>
   </div>
-  <br/>
-  <br/>
   <footer class="py-3 bg-dark fixed-bottom">
     <div class="container">
       <p class="m-0 text-center text-white"></p>
