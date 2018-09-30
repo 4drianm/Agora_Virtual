@@ -55,7 +55,10 @@
       $option = $_GET["opcion"];
       
       if($option == 0 ){
-        $query = mysqli_query($link, "SELECT * FROM productos INNER JOIN vendedores ON productos.id_vendedor = vendedores.id_vendedor");
+        $query = mysqli_query($link, "SELECT * FROM productos INNER JOIN vendedores ON productos.id_vendedor = vendedores.id_vendedor WHERE disponibilidad = 1");
+        if (mysqli_affected_rows($link) == 0) {          
+          echo "<script>alert(\"No hay nadie vendiendo\")</script>";
+        }
         while ($row = mysqli_fetch_array($query, MYSQL_NUM)) {
           echo  '<div class="card">
                 <img class="card-img-top" src='.$row[6].' alt="Card image cap">
@@ -68,9 +71,12 @@
           echo '<p class="card-text">'.$row[8].'</p>
                 </div>
               </div>';
-        }
+        }                
       }else{
-        $query = mysqli_query($link, "SELECT * FROM productos INNER JOIN vendedores ON  productos.id_vendedor = vendedores.id_vendedor where id_categoria = $option");
+        $query = mysqli_query($link, "SELECT * FROM productos INNER JOIN vendedores ON  productos.id_vendedor = vendedores.id_vendedor WHERE id_categoria = $option AND disponibilidad = 1");
+        if (mysqli_affected_rows($link) == 0) {          
+          echo "<script>alert(\"No hay nadie vendiendo\")</script>";
+        }
         while ($row = mysqli_fetch_array($query, MYSQL_NUM)) {
           echo  '<div class="card">
                 <img class="card-img-top" src='.$row[6].' alt="Card image cap">

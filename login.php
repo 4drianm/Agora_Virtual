@@ -6,7 +6,7 @@
       $myusername = mysqli_real_escape_string($link,$_POST['username']);
       $mypassword = mysqli_real_escape_string($link,$_POST['password']); 
       
-      $sql = "SELECT id_vendedor, nombre_vendedor FROM vendedores WHERE mail = '$myusername' and password = '$mypassword'";
+      $sql = "SELECT id_vendedor, nombre_vendedor, disponibilidad FROM vendedores WHERE mail = '$myusername' and password = '$mypassword'";
       $result = mysqli_query($link,$sql);
       $row = mysqli_fetch_array($result,MYSQLI_ASSOC);
       $count = mysqli_num_rows($result);
@@ -14,6 +14,8 @@
       // If result matched $myusername and $mypassword, table row must be 1 row
 		
       if($count == 1) {
+				$id_ = $row["id_vendedor"];
+				mysqli_query($link, "UPDATE vendedores SET disponibilidad = 1 WHERE id_vendedor = $id_");
 				session_start();
 				$_SESSION['valid'] = true;
 				$_SESSION['id'] = time();

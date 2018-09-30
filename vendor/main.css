@@ -45,6 +45,9 @@
 	.card-columns{
 		column-count:2;
 	}
+	footer{
+		display: none;
+	}
 }
 @media screen and (max-width: 400px) {
 	.card-columns{
