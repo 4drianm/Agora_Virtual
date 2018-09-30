@@ -1,13 +1,8 @@
-.card {
-	margin-bottom: 10px;
+.card-columns{
+	column-count:4;
 }
 .card-body {
 	padding: .8rem;
-}
-.col- {
-	max-width: 275px;
-	padding-right: 10px;
-	padding-left: 10px;
 }
 #cont_admin {
 	width:430px;	
@@ -37,34 +32,22 @@
 .custom-file-label::after {
 	content: "Examinar...";
 }
-@media screen and (max-width: 1200px) {
-	.col- {
-		max-width: 285px;
-		padding-right: 11px;
-		padding-left: 11px;
-	}
-	.col-lg-10 .col- {
-		max-width: 32%;
-	}
-}
-@media screen and (max-width: 992px) {
-	.col- {
-		min-width: 45%;
-	}
-	.col-md-9 .col- {
-		max-width: 48%;
-	}
-}
+
 @media screen and (max-width: 768px) {	
-	.col- {
-		max-width: 46%;
+	.card-columns{
+		column-count:3;
 	}
 	#cont_admin {
 		width:330px;
 	}
 }
 @media screen and (max-width: 576px) {
-	.card {
-		min-width: 175px;
+	.card-columns{
+		column-count:2;
+	}
+}
+@media screen and (max-width: 400px) {
+	.card-columns{
+		column-count:1;
 	}
 }

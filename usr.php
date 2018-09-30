@@ -11,6 +11,23 @@
   <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
   <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet">
   <link href="vendor/main.css" rel="stylesheet">
+  <style>
+    @media screen and (max-width: 992px) {	
+	    .card-columns{
+		    column-count:3;
+      }
+    }
+    @media screen and (max-width: 576px) {
+	    .card-columns{
+		    column-count:2;
+	    }
+    }
+    @media screen and (max-width: 400px) {
+	    .card-columns{
+	    	column-count:1;
+      }
+    }
+  </style>
 </head>
 <body>
   <nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top">
@@ -115,24 +132,23 @@
         <a href = "logout.php"><button type="button" class="btn btn-outline-danger w-50">Salir</button></a>
       </div>
       <div class="col-md-9 col-lg-10">
-        <div class="row d-flex justify-content-around">
+        <div class="card-columns">
           <?php
             $query = mysqli_query($link, "SELECT * FROM productos WHERE id_vendedor = ". $id);
             while ($row = mysqli_fetch_array($query, MYSQLI_NUM)) {
-              echo  '<div class="col-">
-                  <div class="card">
-                  <img class="card-img-top" src='.$row[6].' alt="Card image cap">
-                  <div class="card-img-overlay text-center">
-                    <h6 class="card-title">$'.$row[2].'</h6>
-                  </div>
-                  <div class="card-body">';
+              echo  '<div class="card">
+                    <img class="card-img-top" src='.$row[6].' alt="Card image cap">
+                    <div class="card-img-overlay text-center">
+                      <h6 class="card-title">$'.$row[2].'</h6>
+                    </div>
+                    <div class="card-body">';
               echo utf8_encode("<h5 class=\"card-title\">$row[1]</h5>
                               <p class=\"card-text\">$row[3]</p> ");
               echo  '<button type="button" class="btn btn-danger btn-T text-right" value="Borrar" onclick="eliminarProd('.$row[0].')" aria-label="Delete">
                     <i class="fa fa-trash-o" aria-hidden="true"></i>
                     </button>
                     </div>
-                </div></div>';
+                </div>';
             }
             mysqli_close($link);
           ?>

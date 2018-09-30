@@ -48,7 +48,7 @@
   </nav>
   
   <div class="container" style="margin-top:80px;margin-bottom:45px;">
-    <div class="row d-flex justify-content-around">
+    <div class="card-columns">
 
       <?php
       include("connect.php");
@@ -57,8 +57,7 @@
       if($option == 0 ){
         $query = mysqli_query($link, "SELECT * FROM productos INNER JOIN vendedores ON productos.id_vendedor = vendedores.id_vendedor");
         while ($row = mysqli_fetch_array($query, MYSQL_NUM)) {
-          echo  '<div class="col-">
-                <div class="card">
+          echo  '<div class="card">
                 <img class="card-img-top" src='.$row[6].' alt="Card image cap">
                 <div class="card-img-overlay text-center">
                   <h6 class="card-title">$'.$row[2].'</h6>
@@ -68,13 +67,12 @@
                           <p class=\"card-text\">$row[3]</p> ");                  
           echo '<p class="card-text">'.$row[8].'</p>
                 </div>
-              </div></div>';
+              </div>';
         }
       }else{
         $query = mysqli_query($link, "SELECT * FROM productos INNER JOIN vendedores ON  productos.id_vendedor = vendedores.id_vendedor where id_categoria = $option");
         while ($row = mysqli_fetch_array($query, MYSQL_NUM)) {
-          echo  '<div class="col-">
-                <div class="card">
+          echo  '<div class="card">
                 <img class="card-img-top" src='.$row[6].' alt="Card image cap">
                 <div class="card-img-overlay text-center">
                   <h6 class="card-title">$'.$row[2].'</h6>
@@ -84,7 +82,7 @@
                           <p class=\"card-text\">$row[3]</p> ");                  
           echo '<p class="card-text">'.$row[8].'</p>
                 </div>
-              </div></div>';
+              </div>';
           }
       }
       mysqli_close($link);
