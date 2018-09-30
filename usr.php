@@ -60,7 +60,7 @@
             <h5 class="modal-title" id="exampleModalLongTitle">Agregar producto</h5>        
           </div>
           <div class="modal-body">
-            <form action="insertar.php" method="POST">
+            <form action="insertar.php" method="post" enctype="multipart/form-data">
 
               <div class="form-group">
                 <label class="col-form-label">Producto:</label>
@@ -72,23 +72,29 @@
               </div>
               <div class="form-group">
                 <label class="col-form-label">Categoria:</label>
+                <br/>
                 <select name="category" required>
-                    <option>Elige una opción</option>
+                    <option>Elige una...</option>
                     <option value="1">Bebidas</option>
                     <option value="2">Comida</option>
                     <option value="3">Dulces</option>
                     <option value="4">Cigarros</option>
                     <option value="5">Postres</option>
                 </select>
+
+                <label class="col-form-label" style="margin-left:4%">Precio $</label>
+                <input type="number" size="3" name="price" min="1" max="150" required style="max-width: 27%">
               </div>
-              <div class="form-group">
-                <label class="col-form-label">Precio $</label>
-                  <input type="number" size="3" name="price" min="1" max="150" required>
+              <div class="input-group">
+                <div class="custom-file">
+                  <input type="file" name="image" class="custom-file-input" id="inputGroupFile04">
+                  <label class="custom-file-label" for="inputGroupFile04">Selecciona una imagen</label>
+                </div>
               </div>
               <input type="hidden" name="userid" value='<?php echo "$id";?>' >
-              <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="submit" class="btn btn-primary">Save changes</button>
+              <div class="modal-footer" style="margin-top:30px">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                <button type="submit" class="btn btn-primary">Agregar</button>
               </div>
             </form>
           </div>
@@ -111,18 +117,18 @@
       <div class="col-md-9 col-lg-10">
         <div class="row d-flex justify-content-around">
           <?php
-            $query = mysqli_query($link, "SELECT nombre, precio, descripcion, id_producto FROM productos WHERE id_vendedor = ". $id);
-            while ($row = mysqli_fetch_assoc($query)) {
+            $query = mysqli_query($link, "SELECT * FROM productos WHERE id_vendedor = ". $id);
+            while ($row = mysqli_fetch_array($query, MYSQLI_NUM)) {
               echo  '<div class="col-">
                   <div class="card">
-                  <img class="card-img-top" src="img/food_1.jpg" alt="Card image cap">
-                  <div class="card-img-overlay">
-                    <h6 class="card-title">$'.$row['precio'].'</h6>
+                  <img class="card-img-top" src='.$row[6].' alt="Card image cap">
+                  <div class="card-img-overlay text-center">
+                    <h6 class="card-title">$'.$row[2].'</h6>
                   </div>
-                  <div class="card-body">
-                    <h5 class="card-title">'.$row['nombre'].'</h5>
-                    <p class="card-text">'.$row['descripcion'].'</p>
-                    <button type="button" class="btn btn-danger btn-T text-right" value="Borrar" onclick="eliminarProd('.$row['id_producto'].')" aria-label="Delete">
+                  <div class="card-body">';
+              echo utf8_encode("<h5 class=\"card-title\">$row[1]</h5>
+                              <p class=\"card-text\">$row[3]</p> ");
+              echo  '<button type="button" class="btn btn-danger btn-T text-right" value="Borrar" onclick="eliminarProd('.$row[0].')" aria-label="Delete">
                     <i class="fa fa-trash-o" aria-hidden="true"></i>
                     </button>
                     </div>

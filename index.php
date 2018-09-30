@@ -56,33 +56,33 @@
       
       if($option == 0 ){
         $query = mysqli_query($link, "SELECT * FROM productos INNER JOIN vendedores ON productos.id_vendedor = vendedores.id_vendedor");
-        while ($row = mysqli_fetch_assoc($query)) {
-            echo  '<div class="col-">
+        while ($row = mysqli_fetch_array($query, MYSQL_NUM)) {
+          echo  '<div class="col-">
                 <div class="card">
-                <img class="card-img-top" src="img/food_1.jpg" alt="Card image cap">
-                <div class="card-img-overlay">
-                  <h6 class="card-title">$'.$row['precio'].'</h6>
+                <img class="card-img-top" src='.$row[6].' alt="Card image cap">
+                <div class="card-img-overlay text-center">
+                  <h6 class="card-title">$'.$row[2].'</h6>
                 </div>
-                <div class="card-body">
-                  <h5 class="card-title">'.$row['nombre'].'</h5>            
-                  <p class="card-text"><small>'.$row['descripcion'].'</small></p>
-                  <p class="card-text">'.$row['nombre_vendedor'].'</p>
+                <div class="card-body">';
+          echo utf8_encode("<h5 class=\"card-title\">$row[1]</h5>
+                          <p class=\"card-text\">$row[3]</p> ");                  
+          echo '<p class="card-text">'.$row[8].'</p>
                 </div>
               </div></div>';
         }
       }else{
         $query = mysqli_query($link, "SELECT * FROM productos INNER JOIN vendedores ON  productos.id_vendedor = vendedores.id_vendedor where id_categoria = $option");
-          while ($row = mysqli_fetch_assoc($query)) {
-            echo  '<div class="col-">
+        while ($row = mysqli_fetch_array($query, MYSQL_NUM)) {
+          echo  '<div class="col-">
                 <div class="card">
-                <img class="card-img-top" src="img/food_1.jpg" alt="Card image cap">
-                <div class="card-img-overlay">
-                  <h6 class="card-title">$'.$row['precio'].'</h6>
+                <img class="card-img-top" src='.$row[6].' alt="Card image cap">
+                <div class="card-img-overlay text-center">
+                  <h6 class="card-title">$'.$row[2].'</h6>
                 </div>
-                <div class="card-body">
-                  <h5 class="card-title">'.$row['nombre'].'</h5>
-                  <p class="card-text">'.$row['descripcion'].'</p>
-                  <p class="card-text"><small class="text-muted">'.$row['nombre_vendedor'].'</small></p>
+                <div class="card-body">';
+          echo utf8_encode("<h5 class=\"card-title\">$row[1]</h5>
+                          <p class=\"card-text\">$row[3]</p> ");                  
+          echo '<p class="card-text">'.$row[8].'</p>
                 </div>
               </div></div>';
           }

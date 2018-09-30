@@ -16,7 +16,7 @@
 	margin-top: 150px;
 }
 .card-img-overlay {
-	width: 53px;
+	width: 60px;
 	height: 37px;
 	top: 11px;
 	left: 11px;
@@ -33,6 +33,9 @@
 }
 .btn-T:hover{
   opacity: 1;
+}
+.custom-file-label::after {
+	content: "Examinar...";
 }
 @media screen and (max-width: 1200px) {
 	.col- {
