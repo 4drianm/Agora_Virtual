@@ -1,4 +1,7 @@
 .card-columns{
+	display: inline-block;
+	-webkit-column-break-inside: avoid;
+	break-inside: avoid;
 	column-count:4;
 }
 .card-body {
@@ -32,7 +35,28 @@
 .custom-file-label::after {
 	content: "Examinar...";
 }
-
+.card-footer h6 {
+	margin-top: .3rem;
+	margin-bottom: .1rem;
+}
+#sin_vendedores{
+	visibility: hidden;
+	position: absolute;
+	margin-top: 10%;
+	left: 0;
+	right: 0;
+  padding-top: 120px;
+	width: 38%;
+	min-width: 260px;
+	height: 40%;
+  border-radius: 25px;
+  background-color: #E6E6E6;   
+}
+@media screen and (max-width: 1100px) {
+	#sin_vendedores{
+		width: 55%;
+	}
+}
 @media screen and (max-width: 768px) {	
 	.card-columns{
 		column-count:3;

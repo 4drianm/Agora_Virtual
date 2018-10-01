@@ -11,6 +11,7 @@
   <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
   <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet">
   <link href="vendor/main.css" rel="stylesheet">
+  <script src="vendor/main.js"></script>
   <style>
     @media screen and (max-width: 992px) {	
 	    .card-columns{
@@ -81,11 +82,11 @@
 
               <div class="form-group">
                 <label class="col-form-label">Producto:</label>
-                <input type="text" class="form-control" name="product" requierd maxlength="30">
+                <input type="text" class="form-control" name="product" requierd maxlength="50">
               </div>
               <div class="form-group">
                 <label class="col-form-label">Descripción:</label>
-                <input type="text" class="form-control" name="description" maxlength="65"></textarea>
+                <textarea class="form-control" rows="2" name="description" maxlength="150"></textarea>
               </div>
               <div class="form-group">
                 <label class="col-form-label">Categoria:</label>
@@ -100,11 +101,11 @@
                 </select>
 
                 <label class="col-form-label" style="margin-left:4%">Precio $</label>
-                <input type="number" size="3" name="price" min="1" max="150" required style="max-width: 27%">
+                <input type="number" size="3" name="price" min="1" max="200" required style="max-width: 27%">
               </div>
               <div class="input-group">
                 <div class="custom-file">
-                  <input type="file" name="image" class="custom-file-input" id="inputGroupFile04">
+                  <input type="file" name="image" class="custom-file-input" id="inputGroupFile04" required>
                   <label class="custom-file-label" for="inputGroupFile04">Selecciona una imagen</label>
                 </div>
               </div>
@@ -144,7 +145,7 @@
                     <div class="card-body">';
               echo utf8_encode("<h5 class=\"card-title\">$row[1]</h5>
                               <p class=\"card-text\">$row[3]</p> ");
-              echo  '<button type="button" class="btn btn-danger btn-T text-right" value="Borrar" onclick="eliminarProd('.$row[0].')" aria-label="Delete">
+              echo  '<button type="button" class="btn btn-danger btn-T text-right" value="Borrar" onclick="borrar('.$row[0].')" aria-label="Delete">
                     <i class="fa fa-trash-o" aria-hidden="true"></i>
                     </button>
                     </div>
@@ -164,24 +165,6 @@
   
   <script src="vendor/jquery/jquery.min.js"></script>
   <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-  
-  <script>
-    var xmlHttp = false;
-        if (!xmlHttp && typeof XMLHttpRequest !== 'undefined') {
-            xmlHttp = new XMLHttpRequest();
-        }
 
-    function eliminarProd(id_producto){
-        var url = "http://127.0.0.1/~asanchez/AV/eliminar.php";
-            xmlHttp.open("POST", url, true);
-            xmlHttp.onreadystatechange = function deleted(){
-                if (xmlHttp.readyState === 4) {
-                    location.reload();
-                }
-            };
-        xmlHttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-        xmlHttp.send("producto=" + id_producto);
-        }
-  </script>
 </body>
 </html>

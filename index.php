@@ -7,6 +7,7 @@
   <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
   <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet">
   <link href="vendor/main.css" rel="stylesheet">
+  <script src="vendor/main.js"></script>
 </head>
 <body>
   <nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top">
@@ -48,16 +49,20 @@
   </nav>
   
   <div class="container" style="margin-top:80px;margin-bottom:45px;">
-    <div class="card-columns">
+    <!-- Este div se muestra cuando no hay productos disponibles-->
+    <div id="sin_vendedores" class="container text-center">
+      <h2>Por el momento no hay nadie vendiendo</h2>
+    </div> <!-- Termina div-->
 
+    <div class="card-columns">
       <?php
       include("connect.php");
       $option = $_GET["opcion"];
       
       if($option == 0 ){
         $query = mysqli_query($link, "SELECT * FROM productos INNER JOIN vendedores ON productos.id_vendedor = vendedores.id_vendedor WHERE disponibilidad = 1");
-        if (mysqli_affected_rows($link) == 0) {          
-          echo "<script>alert(\"No hay nadie vendiendo\")</script>";
+        if (mysqli_affected_rows($link) == 0) {                    
+          echo "<script>show();</script>";
         }
         while ($row = mysqli_fetch_array($query, MYSQL_NUM)) {
           echo  '<div class="card">
@@ -67,17 +72,22 @@
                 </div>
                 <div class="card-body">';
           echo utf8_encode("<h5 class=\"card-title\">$row[1]</h5>
-                          <p class=\"card-text\">$row[3]</p> ");                  
-          echo '<p class="card-text">'.$row[8].'</p>
+                          <p class=\"card-text\">$row[3]</p></div>");
+
+          echo '<div class="card-footer clearfix">
+                  <h6 class="card-title float-left"><span class="align-middle">'.$row[8].'</span></h6>
+                  <button type="button" class="btn btn-outline-success btn-sm float-right" onclick = "whatsapp('.$row[12].')">
+                    <i class="fa fa-whatsapp" aria-hidden="true"></i>
+                  </button>
                 </div>
               </div>';
         }                
       }else{
         $query = mysqli_query($link, "SELECT * FROM productos INNER JOIN vendedores ON  productos.id_vendedor = vendedores.id_vendedor WHERE id_categoria = $option AND disponibilidad = 1");
         if (mysqli_affected_rows($link) == 0) {          
-          echo "<script>alert(\"No hay nadie vendiendo\")</script>";
+          echo "<script>show();</script>";
         }
-        while ($row = mysqli_fetch_array($query, MYSQL_NUM)) {
+        while ($row = mysqli_fetch_array($query, MYSQL_NUM)) {          
           echo  '<div class="card">
                 <img class="card-img-top" src='.$row[6].' alt="Card image cap">
                 <div class="card-img-overlay text-center">
@@ -85,8 +95,12 @@
                 </div>
                 <div class="card-body">';
           echo utf8_encode("<h5 class=\"card-title\">$row[1]</h5>
-                          <p class=\"card-text\">$row[3]</p> ");                  
-          echo '<p class="card-text">'.$row[8].'</p>
+                <p class=\"card-text\">$row[3]</p></div>");
+          echo '<div class="card-footer clearfix">
+                  <h6 class="card-title float-left"><span class="align-middle">'.$row[8].'</span></h6>
+                  <button type="button" class="btn btn-outline-success btn-sm float-right" onclick = "whatsapp('.$row[12].')">
+                    <i class="fa fa-whatsapp" aria-hidden="true"></i>
+                  </button>
                 </div>
               </div>';
           }
