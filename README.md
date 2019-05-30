@@ -9,3 +9,8 @@ Sistema web donde, alumnos de la Universidad pueden promover: alimentos, bebidas
 > "Branch Master" Fue la primera version y se hizo en equipo
 
 > "Branch AgoraV" Se modifico la interfaz y otras pequeñas mejoras
+
+
+![Pagina web][img1] 
+
+[img1]: /img/main_page.png "AgoraV"
